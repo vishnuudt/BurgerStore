@@ -12,11 +12,19 @@ const controls = [
 ];
 
 const BurgerControls = (props) => {
-    console.log("Burger Control");
+
     return (<div className={classes.BurgerControls}>
             { 
                 controls.map((ctrl) => {
-                return (<BurgerControl key={ctrl.label} label={ctrl.label}/>);
+                return (
+                    <BurgerControl key={ctrl.label} label={ctrl.label}
+                        less={() => {
+                            console.log("clicked"); props.less(ctrl.type);
+                        }}
+                        more={() => {
+                            console.log("clicked"); props.more(ctrl.type);
+                        }}
+                    />);
                 })
             }
             </div>);

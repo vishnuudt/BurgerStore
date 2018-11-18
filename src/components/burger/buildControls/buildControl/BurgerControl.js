@@ -5,8 +5,12 @@ const BurgerControl = (props) => {
     return (
         <div className={classes.BurgerControl}>
             <div className={classes.Label}>{props.label}</div>
-            <button className={classes.Less}>less</button>
-            <button className={classes.More}>more</button>
+            <button className={classes.Less} onClick={() => {
+                console.log("clicked"); props.less();
+            }}>less</button>
+            <button className={classes.More} onClick={() => {
+                console.log("clicked"); props.more();
+            }}>more</button>
         </div>
     );
 };
