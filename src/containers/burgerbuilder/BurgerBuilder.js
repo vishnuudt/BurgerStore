@@ -4,6 +4,8 @@ import Aux from '../../hoc/Aux';
 
 import Burger from '../../components/burger/Burger';
 import BurgerControls from '../../components/burger/buildControls/BurgerControls';
+import Modal from '../../components/ui/modal/Modal';
+import OrderSummary from '../../components/burger/orderSummary/OrderSummary';
 
 class BurgerBuilder extends Component {
 
@@ -13,7 +15,8 @@ class BurgerBuilder extends Component {
             meat : 0,
             salad : 0,
             bacon : 0
-        }   
+        }, 
+        ordering:false   
     }
 
 
@@ -75,15 +78,27 @@ class BurgerBuilder extends Component {
             //     this.setState({ purchasable: false})
             // }
         },
+
+        purchase: () => {
+            this.setState({ordering: true});
+        },
+
+        stopOrdering: () => {
+            this.setState({ordering: false});
+        }
     }
 
     render(){
         return (
             <Aux>
+                <Modal show={this.state.ordering} closed={this.handler.stopOrdering}>
+                    <OrderSummary ingredients={this.state.ingredients} price={"$5"}/>
+                </Modal>
                 <Burger ingredients={this.state.ingredients}></Burger>
                 <BurgerControls 
                     less={this.handler.subtractIngredient}
                     more={this.handler.addIngredient}
+                    orderingHandle={this.handler.purchase}
                 />
             </Aux>
         );

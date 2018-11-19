@@ -27,6 +27,9 @@ const BurgerControls = (props) => {
                     />);
                 })
             }
+            <button className={classes.OrderButton} onClick={props.orderingHandle}>
+            Checkout
+            </button>
             </div>);
 }
 
