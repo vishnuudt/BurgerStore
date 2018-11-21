@@ -85,6 +85,10 @@ class BurgerBuilder extends Component {
 
         stopOrdering: () => {
             this.setState({ordering: false});
+        },
+
+        continueOrdering: () => {
+            this.setState({ordering: false});
         }
     }
 
@@ -92,7 +96,10 @@ class BurgerBuilder extends Component {
         return (
             <Aux>
                 <Modal show={this.state.ordering} closed={this.handler.stopOrdering}>
-                    <OrderSummary ingredients={this.state.ingredients} price={"$5"}/>
+                    <OrderSummary ingredients={this.state.ingredients} 
+                            price={"5"} 
+                            cancel={this.handler.stopOrdering}
+                            continue={this.handler.continueOrdering} />
                 </Modal>
                 <Burger ingredients={this.state.ingredients}></Burger>
                 <BurgerControls 
