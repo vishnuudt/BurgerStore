@@ -23,6 +23,7 @@ class BurgerBuilder extends Component {
     }
 
     componentDidMount(){
+        console.log("top", this.props);
         console.log("This is where axios needs to fetch data and re-render the page");
         axios.get('http://localhost:3001/automations/1')
             .then((response) => {
