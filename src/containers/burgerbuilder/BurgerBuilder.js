@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 
 import Aux from '../../hoc/Aux';
+import axios from 'axios';
 
 import Burger from '../../components/burger/Burger';
 import BurgerControls from '../../components/burger/buildControls/BurgerControls';
@@ -17,6 +18,17 @@ class BurgerBuilder extends Component {
             bacon : 0
         }, 
         ordering:false   
+    }
+
+    componentDidMount(){
+        console.log("This is where axios needs to fetch data and re-render the page");
+        axios.get('http://localhost:3001/automations/1')
+            .then((response) => {
+                console.log(response.data);
+            })
+            .catch(error => {
+                console.error(error);
+            });
     }
 
 
