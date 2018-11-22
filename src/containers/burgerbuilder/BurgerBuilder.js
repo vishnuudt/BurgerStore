@@ -7,6 +7,7 @@ import Burger from '../../components/burger/Burger';
 import BurgerControls from '../../components/burger/buildControls/BurgerControls';
 import Modal from '../../components/ui/modal/Modal';
 import OrderSummary from '../../components/burger/orderSummary/OrderSummary';
+import Spinner from '../../components/ui/spinner/LoadingSpinner';
 
 class BurgerBuilder extends Component {
 
@@ -17,7 +18,8 @@ class BurgerBuilder extends Component {
             salad : 0,
             bacon : 0
         }, 
-        ordering:false   
+        ordering:false, 
+        loading:true
     }
 
     componentDidMount(){
@@ -25,9 +27,11 @@ class BurgerBuilder extends Component {
         axios.get('http://localhost:3001/automations/1')
             .then((response) => {
                 console.log(response.data);
+                setTimeout(() => { this.setState({loading:false})}, Math.random() * 10000);
             })
             .catch(error => {
                 console.error(error);
+                setTimeout(() => { this.setState({loading:false})}, Math.random() * 10000);
             });
     }
 
@@ -105,13 +109,16 @@ class BurgerBuilder extends Component {
     }
 
     render(){
+        let orderSummary =  <OrderSummary ingredients={this.state.ingredients} 
+            price={"5"} 
+            cancel={this.handler.stopOrdering}
+            continue={this.handler.continueOrdering} />;
+        
         return (
             <Aux>
+                { this.state.loading ? <Spinner /> : null }
                 <Modal show={this.state.ordering} closed={this.handler.stopOrdering}>
-                    <OrderSummary ingredients={this.state.ingredients} 
-                            price={"5"} 
-                            cancel={this.handler.stopOrdering}
-                            continue={this.handler.continueOrdering} />
+                    {orderSummary}
                 </Modal>
                 <Burger ingredients={this.state.ingredients}></Burger>
                 <BurgerControls 
