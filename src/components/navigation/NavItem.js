@@ -1,5 +1,6 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 import classes from './NavItem.module.css';
 
 const navItem = ( props ) => {
@@ -17,4 +18,4 @@ const navItem = ( props ) => {
     </li>
   )
 }
-export default navItem
+export default withRouter(navItem);
